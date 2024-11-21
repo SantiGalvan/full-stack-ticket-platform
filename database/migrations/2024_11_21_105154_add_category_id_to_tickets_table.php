@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('tickets', function (Blueprint $table) {
             $table->dropForeignIdFor(Category::class);
-            $table->dropColumn('user_id');
+            $table->dropColumn('category_id');
         });
     }
 };
