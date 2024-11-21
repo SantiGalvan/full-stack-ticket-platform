@@ -12,7 +12,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::all();
+        return inertia('Tickets/TicketsIndex', compact('tickets'));
     }
 
     /**
@@ -34,9 +35,10 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ticket $ticket)
+    public function show(string $slug)
     {
-        //
+        $ticket = Ticket::whereSlug($slug)->first();
+        return inertia('Tickets/TicketShow', compact('ticket'));
     }
 
     /**
