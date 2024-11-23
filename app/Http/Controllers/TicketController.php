@@ -21,7 +21,7 @@ class TicketController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Tickets/Create');
     }
 
     /**
@@ -44,9 +44,10 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ticket $ticket)
+    public function edit(string $slug)
     {
-        //
+        $ticket = Ticket::whereSlug($slug)->first();
+        return inertia('Tickets/Edit', compact('ticket'));
     }
 
     /**
