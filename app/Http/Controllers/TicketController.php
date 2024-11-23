@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -21,7 +23,9 @@ class TicketController extends Controller
      */
     public function create()
     {
-        return inertia('Tickets/Create');
+        $categories = Category::all();
+        $users = User::whereIsAdmin(false)->get();
+        return inertia('Tickets/Create', compact('categories', 'users'));
     }
 
     /**
