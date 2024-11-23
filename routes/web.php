@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -40,7 +41,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
     Route::get('/tickets/{slug}', [TicketController::class, 'show'])->name('tickets.show');
 
-    Route::resource('categories', CategoryController::class)->except('show');
+    Route::resource('categories', CategoryController::class)->except('show', 'store');
+    Route::post('/categories', [CategoryController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('categories.store');
 });
 
 
