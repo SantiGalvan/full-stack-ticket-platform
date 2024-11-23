@@ -47,7 +47,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/tickets/{slug}', [TicketController::class, 'show'])->name('tickets.show');
 
     // Rotta Edit dei Tickets
-    Route::get('tickets/{slug}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+    Route::get('/tickets/{slug}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+
+    // Rotta Store dei Tickets
+    Route::post('/tickest', [TicketController::class, 'store'])->name('tickets.store');
 
     // Rotta delle categorie (Index, Create, Edit, Destroy)
     Route::resource('categories', CategoryController::class)->except('show', 'store');
