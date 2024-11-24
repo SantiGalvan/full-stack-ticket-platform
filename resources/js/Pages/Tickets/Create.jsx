@@ -5,7 +5,7 @@ const Create = ({ categories, users }) => {
     const defaultValues = {
         title: '',
         description: '',
-        operator: '',
+        user: '',
         category: ''
     }
 
