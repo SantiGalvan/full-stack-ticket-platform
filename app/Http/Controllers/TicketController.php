@@ -83,7 +83,10 @@ class TicketController extends Controller
     public function edit(string $slug)
     {
         $ticket = Ticket::whereSlug($slug)->first();
-        return inertia('Tickets/Edit', compact('ticket'));
+        $categories = Category::all();
+        $users = User::whereIsAdmin(false)->get();
+
+        return inertia('Tickets/Edit', compact('ticket', 'users', 'categories'));
     }
 
     /**
