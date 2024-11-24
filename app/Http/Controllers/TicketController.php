@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TicketController extends Controller
 {
@@ -33,7 +34,38 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:5|max:50|string',
+            'description' => 'required|string|min:10',
+            'user' => 'required|exists:users,id',
+            'category' => 'required|exists:categories,id'
+        ], [
+            'title.required' => 'Il titolo del ticket è obbligatorio',
+            'title.min' => 'Il titolo non può essere più corto di :min caratteri',
+            'title.max' => 'Il titolo non può essere più corto di :max caratteri',
+            'description.required' => 'La descrizione del ticket è obbligatoria',
+            'descriptio.min' => 'La descrizione non può essere più corto di :min caratteri',
+            'user.required' => 'L\'opeartore è obbligatorio',
+            'user.exists' => 'Operatore non valido',
+            'category.required' => 'La categoria è obbligatoria',
+            'category.exists' => 'Categoria non valida'
+        ]);
+
+        $data = $request->all();
+
+        $new_ticket = new Ticket();
+
+        $new_ticket->fill($data);
+
+        $new_ticket->slug = Str::slug($new_ticket->title);
+
+        $new_ticket->user_id = $data['user'];
+
+        $new_ticket->category_id = $data['category'];
+
+        $new_ticket->save();
+
+        return to_route('tickets.show', $new_ticket->slug);
     }
 
     /**
