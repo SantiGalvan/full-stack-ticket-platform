@@ -53,7 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/tickest', [TicketController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('tickets.store');
 
     // Rotta Update dei Tickets
-    Route::put('/tickets/{slug}', [TicketController::class, 'update'])->name('tickets.update');
+    Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
 
     // Rotta delle categorie (Index, Create, Edit, Destroy)
     Route::resource('categories', CategoryController::class)->except('show', 'store');

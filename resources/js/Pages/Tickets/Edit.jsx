@@ -16,7 +16,7 @@ const Edit = ({ ticket, users, categories }) => {
                 <TicketForm
                     users={users}
                     categories={categories}
-                    action={route('tickets.update', ticket.slug)}
+                    action={route('tickets.update', ticket.id)}
                     method='put'
                     defaultValues={defaultValues}
                 />
