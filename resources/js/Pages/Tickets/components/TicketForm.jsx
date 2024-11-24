@@ -46,21 +46,21 @@ const TicketForm = ({ defaultValues, action, method, categories, users }) => {
                             {/* Selects */}
                             <div className="pl-8 w-full flex flex-wrap -mx-4 mt-8">
 
-                                {/* Operators */}
+                                {/* Users */}
                                 <div className="w-1/2 pr-2">
 
                                     <InputLabel
-                                        htmlFor="operator"
+                                        htmlFor="user"
                                         value={'Operatori'}
                                     />
 
                                     <select
-                                        name="operator"
-                                        id="operator"
+                                        name="user"
+                                        id="user"
                                         className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
-                                        value={data.operator}
-                                        onChange={e => { setData('operator', e.target.value) }}
-                                        onBlur={() => { validate('operator') }}
+                                        value={data.user}
+                                        onChange={e => { setData('user', e.target.value) }}
+                                        onBlur={() => { validate('user') }}
                                     >
                                         <option value="">Scegli un operatore</option>
                                         {users.map(({ name, id }) => (
@@ -68,7 +68,7 @@ const TicketForm = ({ defaultValues, action, method, categories, users }) => {
                                         ))}
                                     </select>
 
-                                    {invalid('operator') && < InputError message={errors.operator} />}
+                                    {invalid('user') && < InputError message={errors.user} />}
 
                                 </div>
 
