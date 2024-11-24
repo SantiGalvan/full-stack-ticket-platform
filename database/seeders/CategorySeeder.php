@@ -16,43 +16,43 @@ class CategorySeeder extends Seeder
         $categories = [
             [
                 'label' => 'Bug',
-                'color' => '#FF4500',
+                'color' => '#8B0000',
             ],
             [
-                'label' => 'Richiesta di funzionalità',
-                'color' => '#1E90FF',
+                'label' => 'Funzionalità',
+                'color' => '#303C6C',
             ],
             [
                 'label' => 'Supporto tecnico',
-                'color' => '#32CD32',
+                'color' => '#3C6166',
             ],
             [
                 'label' => 'Feedback generale',
-                'color' => '#FFD700',
+                'color' => '#4E3629',
             ],
             [
                 'label' => 'Documentazione',
-                'color' => '#8A2BE2',
+                'color' => '#301934',
             ],
             [
                 'label' => 'Integrazioni',
-                'color' => '#FF6347',
+                'color' => '#654321',
             ],
             [
                 'label' => 'Account utente',
-                'color' => '#4B0082',
+                'color' => '#2F4F4F',
             ],
             [
                 'label' => 'Sicurezza',
-                'color' => '#DC143C',
+                'color' => '#3B0D0C',
             ],
             [
                 'label' => 'Pagamenti',
-                'color' => '#228B22',
+                'color' => '#18453B',
             ],
             [
                 'label' => 'Altro',
-                'color' => '#FF1493',
+                'color' => '#4B0082',
             ],
         ];
 
