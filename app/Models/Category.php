@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['label', 'color'];
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);

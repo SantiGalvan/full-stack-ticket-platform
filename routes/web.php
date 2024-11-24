@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -37,7 +39,27 @@ Route::middleware('auth')->group(function () {
 
     // Rotte index dei ticket
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
+
+    // Rotta Create dei Tickets
+    Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create');
+
+    // Rotta Show dei Tickets
     Route::get('/tickets/{slug}', [TicketController::class, 'show'])->name('tickets.show');
+
+    // Rotta Edit dei Tickets
+    Route::get('/tickets/{slug}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
+
+    // Rotta Store dei Tickets
+    Route::post('/tickest', [TicketController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('tickets.store');
+
+    // Rotta Update dei Tickets
+    Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
+
+    // Rotta delle categorie (Index, Create, Edit, Destroy)
+    Route::resource('categories', CategoryController::class)->except('show', 'store');
+
+    // Rotta Store delle categorie
+    Route::post('/categories', [CategoryController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('categories.store');
 });
 
 
