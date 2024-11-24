@@ -1,5 +1,9 @@
 import { TinyColor } from "@ctrl/tinycolor";
-import './index.css';
+import './css/index.css';
+import { Link } from "@inertiajs/react";
+import { FaPlus } from "react-icons/fa";
+import { FaPencilAlt } from "react-icons/fa";
+import { FaMagnifyingGlassPlus } from "react-icons/fa6";
 
 // Funzione per gestire i colori
 const adjustColor = (color) => {
@@ -49,12 +53,16 @@ const Index = ({ tickets }) => {
                     <a href="#" className="hover:text-blue-600 transition-colors duration-300 font-semibold">Link 3</a>
                 </div>
             </div>
-            <div className="container mx-auto mt-20">
+            <div className="container mx-auto mt-2">
                 {/* Bottone di crezione del task */}
-                <div className="flex justify-end">
-                    <button className="bg-green-600 text-white hover:bg-green-500 text-shadow h-[25px] text-[13px] px-3 py-[1px] border-[1px] rounded-xl font-semibold transition-colors duration-300 ease-in-out">
-                        Crea Ticket
-                    </button>
+                <div className="flex justify-center items-center gap-12">
+                    <h1 className="text-4xl text-center my-12">Lista dei ticket</h1>
+                    <Link
+                        href={route('tickets.create')}
+                        className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
+                    >
+                        <FaPlus />Crea Ticket
+                    </Link>
                 </div>
                 {/* Row */}
                 <div className="flex flex-wrap -mx-4">
@@ -64,7 +72,7 @@ const Index = ({ tickets }) => {
                         return (
                             <div key={t.id} className="p-4 w-1/3">
                                 {/* Card */}
-                                <div className="p-4 flex flex-col bg-[#FCFCFB] shadow-lg rounded-lg h-[300px]">
+                                <div className="p-4 flex flex-col bg-[#FCFCFB] shadow-lg rounded-lg h-[340px]">
                                     <h1 className="text-[24px] pb-1 text-center">{t.title}</h1>
                                     <div className="pb-3">
                                         {/* Badge dello status */}
@@ -85,8 +93,23 @@ const Index = ({ tickets }) => {
                                         </span>
                                     </div>
                                     {/* Descrzione della card */}
-                                    <div className="card-body border-t-[1px] pt-5">
+                                    <div className="card-body border-t-[1px] h-[170px] pt-5">
                                         <p>{abstract(t.description, 350)}</p>
+                                    </div>
+                                    {/* Bottoni di modifica e dettaglio */}
+                                    <div className="flex justify-center items-center gap-8 pt-5">
+                                        <Link
+                                            className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
+                                            href={route('tickets.edit', t.slug)}
+                                        >
+                                            <FaPencilAlt />Modifica
+                                        </Link>
+                                        <Link
+                                            className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
+                                            href={route('tickets.show', t.slug)}
+                                        >
+                                            <FaMagnifyingGlassPlus />Dettaglio
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

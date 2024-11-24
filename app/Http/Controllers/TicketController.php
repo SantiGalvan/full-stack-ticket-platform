@@ -75,7 +75,7 @@ class TicketController extends Controller
     public function show(string $slug)
     {
         $ticket = Ticket::whereSlug($slug)->first();
-        return inertia('Tickets/TicketShow', compact('ticket'));
+        return inertia('Tickets/Show', compact('ticket'));
     }
 
     /**
