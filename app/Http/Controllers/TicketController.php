@@ -16,8 +16,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::all();
-        return inertia('Tickets/TicketsIndex', compact('tickets'));
+        $tickets = Ticket::with('category')->get();
+        return inertia('Tickets/Index', compact('tickets'));
     }
 
     /**

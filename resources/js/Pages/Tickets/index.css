@@ -1,0 +1,22 @@
+/* Stili per il badge dello status */
+.assigned {
+    background-color: #a9faaca1;
+    color: #088008;
+    border: 1px solid #088008;
+}
+
+.closed {
+    background-color: #ffd8d8;
+    color: #e41414;
+    border: 1px solid #e41414;
+}
+
+.in-progress {
+    background-color: #fffce0de; 
+    color: #ffbe19;
+    border: 1px solid #ffbe19;
+}
+
+.text-shadow {
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
