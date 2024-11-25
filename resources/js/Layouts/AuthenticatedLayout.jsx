@@ -40,11 +40,13 @@ export default function Authenticated({ title, children }) {
                                     </div>
 
                                     {/* Categories */}
-                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                        <NavLink href={route('categories.index')} active={route().current('categories.*')}>
-                                            Categories
-                                        </NavLink>
-                                    </div>
+                                    {user.is_admin !== 0 &&
+                                        <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                            <NavLink href={route('categories.index')} active={route().current('categories.*')}>
+                                                Categories
+                                            </NavLink>
+                                        </div>
+                                    }
 
                                     {/* Dashboard */}
                                     <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

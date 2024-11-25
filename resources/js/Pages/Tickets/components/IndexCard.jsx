@@ -17,7 +17,7 @@ const abstract = (description, maxLength) => {
     return description;
 };
 
-const IndexCard = ({ t, textColor, backgroundColor }) => {
+const IndexCard = ({ t, textColor, backgroundColor, auth }) => {
     return (
         <div className="p-4 flex flex-col bg-[#FCFCFB] shadow-lg rounded-lg h-[340px]">
             <h1 className="text-[24px] pb-1 text-center">{t.title}</h1>
@@ -45,12 +45,14 @@ const IndexCard = ({ t, textColor, backgroundColor }) => {
             </div>
             {/* Bottoni di modifica e dettaglio */}
             <div className="flex justify-center items-center gap-8 pt-5">
-                <Link
-                    className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
-                    href={route('tickets.edit', t.slug)}
-                >
-                    <FaPencilAlt />Modifica
-                </Link>
+                {auth.user.is_admin !== 0 &&
+                    <Link
+                        className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
+                        href={route('tickets.edit', t.slug)}
+                    >
+                        <FaPencilAlt />Modifica
+                    </Link>
+                }
                 <Link
                     className="bg-blue-500 hover:bg-blue-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
                     href={route('tickets.show', t.slug)}
