@@ -1,6 +1,6 @@
 import { TinyColor } from "@ctrl/tinycolor";
 import './css/index.css';
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa";
 import IndexCard from "./components/IndexCard";
 
@@ -26,6 +26,10 @@ const adjustColor = (color) => {
 const Index = ({ tickets }) => {
     return (
         <section>
+
+            {/* Titolo della pagina */}
+            <Head title="Tickets" />
+
             <div className="container mx-auto mt-2">
                 {/* Bottone di crezione del task */}
                 <div className="flex justify-center items-center gap-12">

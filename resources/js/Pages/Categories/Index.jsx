@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
@@ -6,6 +6,10 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 const Index = ({ categories }) => {
     return (
         <section>
+
+            {/* Titolo della pagina */}
+            <Head title="Categories" />
+
             <div className="container mx-auto">
                 <div className="flex justify-center items-center gap-12">
 
@@ -39,6 +43,7 @@ const Index = ({ categories }) => {
                                     <Link
                                         href={route('categories.destroy', { id: category.id })}
                                         method="DELETE"
+                                        as="button"
                                         className="mb-4 bg-red-500 hover:bg-red-700 text-white data-shadow font-bold py-2 px-4 rounded flex gap-1 items-center"
                                     >
                                         <RiDeleteBin6Fill />Elimina
