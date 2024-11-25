@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Rotte index dei ticket
+    // Rotte Index dei ticket
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
 
     // Rotta Create dei Tickets
@@ -55,10 +55,10 @@ Route::middleware('auth')->group(function () {
     // Rotta Update dei Tickets
     Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
 
-    // Rotta delle categorie (Index, Create, Edit, Destroy)
+    // Rotta delle Categories (Index, Create, Edit, Destroy)
     Route::resource('categories', CategoryController::class)->except('show', 'store');
 
-    // Rotta Store delle categorie
+    // Rotta Store delle Categories
     Route::post('/categories', [CategoryController::class, 'store'])->middleware([HandlePrecognitiveRequests::class])->name('categories.store');
 });
 

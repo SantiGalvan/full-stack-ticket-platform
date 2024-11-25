@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -16,7 +17,12 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::with('category')->get();
+        if (Auth::user()->is_admin) {
+            $tickets = Ticket::with('category')->get();
+        } else {
+            $tickets = Ticket::whereUserId(Auth::user()->id)->with('category')->get();
+        }
+
         return inertia('Tickets/Index', compact('tickets'));
     }
 
@@ -75,6 +81,11 @@ class TicketController extends Controller
     public function show(string $slug)
     {
         $ticket = Ticket::whereSlug($slug)->first();
+
+        if ($ticket->user_id !== Auth::id()) {
+            return to_route('tickets.index');
+        }
+
         return inertia('Tickets/Show', compact('ticket'));
     }
 
