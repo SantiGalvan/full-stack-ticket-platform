@@ -31,10 +31,6 @@ class TicketController extends Controller
      */
     public function create()
     {
-        if (!Auth::user()->is_admin) {
-            return to_route('tickets.index');
-        }
-
         $categories = Category::all();
         $users = User::whereIsAdmin(false)->get();
 
@@ -99,10 +95,6 @@ class TicketController extends Controller
      */
     public function edit(string $slug)
     {
-        if (!Auth::user()->is_admin) {
-            return to_route('tickets.index');
-        }
-
         $ticket = Ticket::whereSlug($slug)->first();
         $categories = Category::all();
         $users = User::whereIsAdmin(false)->get();
