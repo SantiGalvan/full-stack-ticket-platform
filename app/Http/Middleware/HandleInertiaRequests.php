@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -29,11 +30,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        return [
+        $shared_data =  [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
             ],
         ];
+
+        // Controllo se ci sono dati in sessione
+        if (Session::has('message')) {
+            $shared_data = [
+                ...$shared_data,
+                'flash' => [
+                    'message' => session('message')
+                ]
+            ];
+        }
+
+        return $shared_data;
     }
 }
