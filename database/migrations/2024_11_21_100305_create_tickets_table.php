@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 50)->required();
             $table->string('slug');
             $table->text('description')->required();
-            $table->string('state')->default('Assegnato');
+            $table->enum('state', ['In lavorazione', 'Chiuso', 'Assegnato'])->default('Assegnato');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use App\Enums\TicketState;
 
 class TicketController extends Controller
 {
@@ -98,8 +99,9 @@ class TicketController extends Controller
         $ticket = Ticket::whereSlug($slug)->first();
         $categories = Category::all();
         $users = User::whereIsAdmin(false)->get();
+        $states = TicketState::cases();
 
-        return inertia('Tickets/Edit', compact('ticket', 'users', 'categories'));
+        return inertia('Tickets/Edit', compact('ticket', 'users', 'categories', 'states'));
     }
 
     /**
@@ -111,7 +113,8 @@ class TicketController extends Controller
             'title' => 'required|min:5|max:50|string',
             'description' => 'required|string|min:10',
             'user' => 'required|exists:users,id',
-            'category' => 'required|exists:categories,id'
+            'category' => 'required|exists:categories,id',
+            'state' => ['required', Rule::in(array_column(TicketState::cases(), 'value'))]
         ], [
             'title.required' => 'Il titolo del ticket è obbligatorio',
             'title.min' => 'Il titolo non può essere più corto di :min caratteri',
@@ -121,7 +124,9 @@ class TicketController extends Controller
             'user.required' => 'L\'opeartore è obbligatorio',
             'user.exists' => 'Operatore non valido',
             'category.required' => 'La categoria è obbligatoria',
-            'category.exists' => 'Categoria non valida'
+            'category.exists' => 'Categoria non valida',
+            'state.required' => 'Lo stato del ticket è obbligatorio',
+            'state.in' => 'Lo stato selezionato non è valido'
         ]);
 
         $data = $request->all();
