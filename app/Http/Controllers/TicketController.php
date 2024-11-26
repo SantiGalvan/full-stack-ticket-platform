@@ -83,7 +83,7 @@ class TicketController extends Controller
     {
         $ticket = Ticket::whereSlug($slug)->first();
 
-        if ($ticket->user_id !== Auth::id()) {
+        if ($ticket->user_id !== Auth::id() && Auth::user()->is_admin !== 1) {
             return to_route('tickets.index');
         }
 
