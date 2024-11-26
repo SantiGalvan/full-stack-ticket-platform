@@ -7,7 +7,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaSave } from "react-icons/fa";
 import { VscDebugRestart } from "react-icons/vsc";
 
-const TicketForm = ({ defaultValues, action, method, categories, users }) => {
+const TicketForm = ({ defaultValues, action, method, categories, users, isEdit, states }) => {
 
     const { data, setData, submit, hasError, errors, processing, invalid, validate } = useForm(method, action, defaultValues);
 
@@ -101,6 +101,39 @@ const TicketForm = ({ defaultValues, action, method, categories, users }) => {
 
                             </div>
 
+                            {/* Stato */}
+                            {isEdit &&
+                                <>
+                                    <h4 className="px-4 mt-8 font-medium text-sm text-gray-700">Stato</h4>
+                                    <div className="w-full px-4 mt-1 flex gap-8">
+
+                                        {/* Assegnato */}
+                                        {states.map((state, i) => (
+                                            <div key={`state-${i}`} className="inline-flex items-center">
+
+                                                <label className="relative flex items-center cursor-pointer" htmlFor={state}>
+                                                    <input
+                                                        name="state"
+                                                        type="radio"
+                                                        className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-slate-400 transition-all"
+                                                        id={state}
+                                                        value={state}
+                                                        checked={data.state === state}
+                                                        onChange={e => setData('state', e.target.value)}
+                                                    />
+                                                    <span className="absolute bg-slate-800 w-3 h-3 rounded-full opacity-0 peer-checked:opacity-100 transition-opacity duration-200 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></span>
+
+                                                </label>
+
+                                                <label className="ml-2 text-slate-600 cursor-pointer text-sm" htmlFor={state}>{state}</label>
+
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                </>
+                            }
+
                         </div>
 
                     </div>
@@ -118,7 +151,7 @@ const TicketForm = ({ defaultValues, action, method, categories, users }) => {
                             name="description"
                             className="w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                             type="text-area"
-                            rows="5"
+                            rows="7"
                             cols="50"
                             value={data.description}
                             onChange={e => { setData('description', e.target.value) }}
