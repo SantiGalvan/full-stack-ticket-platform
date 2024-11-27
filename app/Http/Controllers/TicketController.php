@@ -19,7 +19,7 @@ class TicketController extends Controller
     public function index()
     {
         if (Auth::user()->is_admin) {
-            $tickets = Ticket::with('category')->get();
+            $tickets = Ticket::with('category', 'user')->get();
         } else {
             $tickets = Ticket::whereUserId(Auth::user()->id)->with('category')->get();
         }
@@ -82,7 +82,7 @@ class TicketController extends Controller
      */
     public function show(string $slug)
     {
-        $ticket = Ticket::whereSlug($slug)->first();
+        $ticket = Ticket::whereSlug($slug)->with('category', 'user')->first();
 
         if ($ticket->user_id !== Auth::id() && Auth::user()->is_admin !== 1) {
             return to_route('tickets.index');
