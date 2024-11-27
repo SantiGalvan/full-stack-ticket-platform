@@ -1,27 +1,8 @@
-import { TinyColor } from "@ctrl/tinycolor";
 import './css/index.css';
 import { Head, Link } from "@inertiajs/react";
 import { FaPlus } from "react-icons/fa";
-import IndexCard from "./components/IndexCard";
+import TicketCard from "./components/TicketCard";
 
-// Funzione per gestire i colori
-const adjustColor = (color) => {
-    const tinyColor = new TinyColor(color);
-    let adjustedColor = color;
-
-    if (tinyColor.isLight()) {
-        // Se il colore è troppo chiaro verrà scurito del 45%
-        adjustedColor = tinyColor.darken(45).toHexString();
-    } else if (tinyColor.isDark()) {
-        // Se il colore è troppo scuro verrà schiarito del 30%
-        adjustedColor = tinyColor.lighten(30).toHexString();
-    }
-
-    return {
-        textColor: adjustedColor,
-        backgroundColor: new TinyColor(adjustedColor).setAlpha(0.2).toRgbString(),
-    };
-};
 
 const Index = ({ tickets, auth }) => {
     return (
@@ -47,11 +28,10 @@ const Index = ({ tickets, auth }) => {
                 <div className="flex flex-wrap -mx-4">
                     {/* Col */}
                     {tickets.map((t) => {
-                        const { textColor, backgroundColor } = adjustColor(t.category.color);
                         return (
                             <div key={t.id} className="p-4 w-1/3">
                                 {/* Card */}
-                                <IndexCard auth={auth} t={t} textColor={textColor} backgroundColor={backgroundColor} />
+                                <TicketCard auth={auth} t={t} />
                             </div>
                         );
                     })}
